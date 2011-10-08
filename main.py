@@ -149,7 +149,7 @@ class AdvancedSearchPage(webapp.RequestHandler):
 <table>
   <tr><th colspan=2><h3>Results</h3></th></tr>
   <tr><th align="right" valign="top">GQL query:</th><td align="left">%s<td></tr>
-  <tr><th align="right" valign="top">Results:</th><td align="left">%s<td></tr>
+  <tr><th align="right" valign="top">Matching Photos:</th><td align="left">%s<td></tr>
   <tr><th align="right" valign="top">Latency with minimal set of indexes:</th><td align="left">%d ms<td></tr>
   <tr><th align="right" valign="top">Index scans:</th><td align="left"><pre>%s</pre><td></tr>
 ''' % (self.get_gql(queryB), queryB.count(10000),

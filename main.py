@@ -143,7 +143,7 @@ class AdvancedSearchPage(webapp.RequestHandler):
         order = value
         queryA.order(value)
         queryB.order(value)
-
+    normal_time = self.get_time(queryA)
     self.response.out.write('''
 <center>
 <table>
@@ -153,15 +153,16 @@ class AdvancedSearchPage(webapp.RequestHandler):
   <tr><th align="right" valign="top">Latency with minimal set of indexes:</th><td align="left">%d ms<td></tr>
   <tr><th align="right" valign="top">Index scans:</th><td align="left"><pre>%s</pre><td></tr>
 ''' % (self.get_gql(queryB), queryB.count(10000),
-       self.get_time(queryA), self.get_minimal_indexes(queryA, order)))
+       normal_time, self.get_minimal_indexes(queryA, order)))
 
     opt_index_scans = self.get_optimized_indexes(queryB, order)
     opt_note = ''
     if opt_index_scans:
+      opt_time = self.get_time(queryB)
       self.response.out.write('''
-  <tr><th align="right" valign="top">Latency with an optimized* set of indexes:</th><td align="left">%d ms<td></tr>
+  <tr><th align="right" valign="top">Latency with an optimized* set of indexes:</th><td align="left">%d ms (%dx faster)<td></tr>
   <tr><th align="right" valign="top">Optimized index scans:</th><td align="left"><pre>%s</pre><td></tr>
-''' % (self.get_time(queryB), opt_index_scans))
+''' % (opt_time, normal_time / opt_time - 1, opt_index_scans))
 
       opt_note = '''
   * The data has been set up so queries with filters on

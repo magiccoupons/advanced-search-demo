@@ -160,9 +160,9 @@ class AdvancedSearchPage(webapp.RequestHandler):
     if opt_index_scans:
       opt_time = self.get_time(queryB)
       self.response.out.write('''
-  <tr><th align="right" valign="top">Latency with an optimized* set of indexes:</th><td align="left">%d ms (%dx faster)<td></tr>
+  <tr><th align="right" valign="top">Latency with an optimized* set of indexes:</th><td align="left">%d ms (%dx speedup)<td></tr>
   <tr><th align="right" valign="top">Optimized index scans:</th><td align="left"><pre>%s</pre><td></tr>
-''' % (opt_time, normal_time / opt_time - 1, opt_index_scans))
+''' % (opt_time, normal_time / opt_time, opt_index_scans))
 
       opt_note = '''
   * The data has been set up so queries with filters on

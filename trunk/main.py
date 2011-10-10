@@ -38,7 +38,10 @@ _word_delimiter_regex = re.compile('[' + re.escape(string.punctuation) + ']')
 class AdvancedSearchPage(webapp.RequestHandler):
 
   def get_filters(self, query):
-    for f, value in query._get_query().iteritems():
+    query = query._get_query()
+    sorted_filters = sorted([f for f in query.iterkeys()])
+    for f in sorted_filters:
+      value = query[f]
       if isinstance(value, list):
         for v in value:
           yield f, v

@@ -1,0 +1,80 @@
+{%extends "base.html"%}
+{%block body%}
+  <center>
+  <form name="searchform" method="post">
+    <table>
+      <tr><th colspan=4><h3>Photo search</h3></th></tr>
+      <tr>
+        <th>Tags*</th>
+        <td colspan="3"><input name="tags" value="" size="35"></td>
+      </tr>
+      <tr>
+        <th>Owner</th>
+        <td colspan="3">
+          <input name="owner_id" value="user@example.com" size="35">
+        </td>
+      </tr>
+      <tr>
+        <th>Size</th>
+        <td>
+          <select name="size" size="4">
+            <option value="" selected>Any</option>
+            <option value=0>Icon</option>
+            <option value=1>Medium</option>
+            <option value=2>Large</option>
+          </select>
+        </td>
+        <th>Aspect</th>
+        <td>
+          <select name="aspect" size="5">
+            <option value="" selected>Any</option>
+            <option value=0>Tall</option>
+            <option value=1>Square</option>
+            <option value=2>Wide</option>
+            <option value=3>Panoramic</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Coloration</th>
+        <td>
+          <select name="coloration" size="3">
+            <option value="" selected>Any</option>
+            <option value=0>Black &amp; White</option>
+            <option value=1>Color</option>
+          </select>
+        </td>
+        <th>License</th>
+        <td>
+          <select name="license" size="6">
+            <option value="" selected>Any</option>
+            <option value=0>None</option>
+            <option value=1>Reuse</option>
+            <option value=2>Commerical Reuse</option>
+            <option value=3>Reuse with modification</option>
+            <option value=4>Commerical reuse with modification</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Order by</th>
+        <td colspan="3">
+          <select name="order" size="3">
+            <option value="-date" selected>Date</option>
+            <option value="-rating">Rating</option>
+            <option value="-comment_count">Number of comments</option>
+            <option value="-download_count">Number of downloads</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>
+        </th>
+        <td colspan="3">
+          <input type="submit" value="Search"><br>
+        </td>
+      </tr>
+      <tr><td colspan=4 width=300 align=left>* Populated tags include: {{tags}}</td></tr>
+    </table>
+  </form>
+{%endblock%}

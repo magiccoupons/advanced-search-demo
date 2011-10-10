@@ -1,0 +1,31 @@
+{%extends "base.html"%}
+{%block body%}
+<center>
+<table>
+  <tr><th colspan=2><h3>Results</h3></th></tr>
+  <tr><th>GQL query:</th><td>{{gql}}</td></tr>
+  <tr><th>Matching Photos:</th><td align="left">{{count}}</td></tr>
+  <tr><th>Latency with minimal set of indexes:</th><td>{{normal_ms}} ms*</td></tr>
+  <tr><th>Index scans:</th><td><pre>{{normal_scans}}</pre></td></tr>
+{%if opt_scans %}
+  <tr><th>Latency with an optimized** set of indexes:</th><td>{{opt_ms}} ms* ({{speedup}}x speed up)</td></tr>
+  <tr><th>Optimized index scans:</th><td><pre>{{opt_scans}}</pre></td></tr>
+{%endif%}
+  <tr><th>Fastest*** index:</th><td><pre>{{single_index}}</pre></td></tr>
+<tr><td colspan=2 width=300>
+  <p>* Latency is based on a single run of the query and may not accurately
+  represent aggregate performance.
+{%if opt_scans %}
+  <p>** The data has been set up so queries with filters on
+  <code>aspect=PANORAMIC</code> and <code>coloration=BLACK_AND_WHITE</code> see
+  worst case performance. The indexes have been optimized by adding:
+  <code>Index(Photo, aspect, coloration, ...)</code></p>
+{%endif%}
+  <p>*** With this index, only a single index scan would be needed for the
+  given query. See the <a href="http://code.google.com/appengine/articles/indexselection.html">
+  Index Selection and Advanced Search</a> article to find out why it is
+  problematic to always use the fastest index.</p>
+  </td></tr>
+</table>
+</center>
+{%endblock%}

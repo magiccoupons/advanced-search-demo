@@ -66,19 +66,19 @@ class AdvancedSearchPage(webapp.RequestHandler):
     return result + '    ORDER BY %s</pre>' % self.get_order(query)
 
   def get_fastest_index(self, query, order):
-    result = '<ol><li>Index(Photo'
+    result = 'Index(Photo'
     for f, _ in self.get_filters(query):
       result += ', ' + f
-    return result + ', %s)</li></ol>' % order
+    return result + ', %s)' % order
 
   def get_minimal_indexes(self, query, order):
-    result = '<ol>'
+    result = []
     for f, _ in self.get_filters(query):
-      result += '<li>Index(Photo, %s, %s)\n' % (f, order)
-    return result + '</ol>'
+      result.append('Index(Photo, %s, %s)' % (f, order))
+    return result
 
   def get_optimized_indexes(self, query, order):
-    result = '<ol>'
+    result = []
     has_aspect = False
     has_coloration = False
     for f, _ in self.get_filters(query):
@@ -87,11 +87,11 @@ class AdvancedSearchPage(webapp.RequestHandler):
       elif f == 'coloration':
         has_coloration = True
       else:
-        result += '<li>Index(Photo, %s, %s)\n' % (f, order)
+        result.append('Index(Photo, %s, %s)' % (f, order))
 
     if has_aspect and has_coloration:
-      result += '<li><b>Index(Photo, aspect, coloration, %s)</b>\n' % order
-      return result + '</ol>'
+      result.append('<b>Index(Photo, aspect, coloration, %s)</b>' % order)
+      return result
 
   def get_time(self, query):
     start = datetime.datetime.now()
@@ -134,7 +134,8 @@ class AdvancedSearchPage(webapp.RequestHandler):
 
     if values['opt_scans']:
       values['opt_ms'] = self.get_time(queryB)
-      values['speedup'] = values['normal_ms'] / values['opt_ms']
+      values['speedup'] = '%.2f' % (
+        float(values['normal_ms']) / values['opt_ms'],)
 
     self.response.out.write(template.render('templates/results.html', values))
 

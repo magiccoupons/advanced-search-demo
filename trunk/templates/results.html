@@ -6,12 +6,28 @@
   <tr><th>GQL query:</th><td>{{gql}}</td></tr>
   <tr><th>Matching Photos:</th><td align="left">{{count}}</td></tr>
   <tr><th>Latency with minimal set of indexes:</th><td>{{normal_ms}} ms*</td></tr>
-  <tr><th>Index scans:</th><td><pre>{{normal_scans}}</pre></td></tr>
+  <tr>
+    <th>Index scans:</th>
+    <td>
+      <ol>
+      {%for index in normal_scans%}
+        <li><code>{{index}}</code>
+      {%endfor%}
+      </ol>
+    </td></tr>
 {%if opt_scans %}
   <tr><th>Latency with an optimized** set of indexes:</th><td>{{opt_ms}} ms* ({{speedup}}x speed up)</td></tr>
-  <tr><th>Optimized index scans:</th><td><pre>{{opt_scans}}</pre></td></tr>
+  <tr>
+    <th>Optimized index scans:</th>
+    <td>
+      <ol>
+      {%for index in opt_scans%}
+        <li><code>{{index}}</code>
+      {%endfor%}
+      </ol>
+    </td></tr>
 {%endif%}
-  <tr><th>Fastest*** index:</th><td><pre>{{single_index}}</pre></td></tr>
+  <tr><th>Fastest*** index:</th><td><ol><li><code>{{single_index}}</code></li></td></tr>
 <tr><td colspan=2 width=300>
   <p>* Latency is based on a single run of the query and may not accurately
   represent aggregate performance.

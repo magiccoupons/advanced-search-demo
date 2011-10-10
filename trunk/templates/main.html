@@ -1,0 +1,30 @@
+{%extends "base.html"%}
+{%block body%}
+
+<center>
+<table width=600>
+  <tr><th colspan=2><h3>Demos</h3></th></tr>
+  <tr>
+    <td width=150><a href="/search">Advanced Search</a></td>
+    <td>Fully interactive version of the Advanced Search example from the
+article <a href="http://code.google.com/appengine/articles/indexselection.html">Index Selection and Advanced Search</a></td>
+  </tr>
+  <tr>
+    <td><a href="#" onClick='document.forms["opt_example"].submit();'>Optimization Example</a></td>
+    <td>The result of a query specifically designed to showcase the worst case
+performance of zigzag merge join and the improvement seen by adding an optimal
+index as described in the <a href="http://code.google.com/appengine/articles/indexselection.html#Performance">Performance</a> section of the article.
+  </tr>
+  <tr>
+    <td><a href="http://code.google.com/p/advanced-search-demo/source/browse/#svn%2Ftrunk">Source Code</a></td>
+    <td>View the complete source code for this application</td>
+  </tr>
+</table>
+<form id=opt_example method=post action="/search">
+<input type=hidden name=owner_id value=user@example.com>
+<input type=hidden name=order value="-date">
+<input type=hidden name=coloration value=0>
+<input type=hidden name=aspect value=3>
+</form>
+
+{%endblock%}

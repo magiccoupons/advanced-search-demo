@@ -27,7 +27,7 @@
       </ol>
     </td></tr>
 {%endif%}
-  <tr><th>Fastest*** index:</th><td><ol><li><code>{{single_index}}</code></li></td></tr>
+  <tr><th>Fastest**{%if opt_scans %}*{%endif%} index:</th><td><ol><li><code>{{single_index}}</code></li></td></tr>
 <tr><td colspan=2 width=300>
   <p>* Latency is based on a single run of the query and may not accurately
   represent aggregate performance.
@@ -37,7 +37,7 @@
   worst case performance. The indexes have been optimized by adding:
   <code>Index(Photo, aspect, coloration, ...)</code></p>
 {%endif%}
-  <p>*** With this index, only a single index scan would be needed for the
+  <p>**{%if opt_scans %}*{%endif%} With this index, only a single index scan would be needed for the
   given query. See the <a href="http://code.google.com/appengine/articles/indexselection.html">
   Index Selection and Advanced Search</a> article to find out why it is
   problematic to always use the fastest index.</p>
